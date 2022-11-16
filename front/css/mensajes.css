@@ -1,0 +1,37 @@
+.box.arrow-left:after {
+    content: " ";
+    position: absolute;
+    left: -15px;
+    top: 25px;
+    border-top: 15px solid transparent;
+    border-right: 15px solid var(--dark-color);
+    border-left: none;
+    border-bottom: 15px solid transparent;
+  }
+
+  .box.arrow-right:after {
+    content: " ";
+    position: absolute;
+    right: -15px;
+    top: 25px;
+    border-top: 15px solid transparent;
+    border-right: none;
+    border-left: 15px solid  var(--dark-color);
+    border-bottom: 15px solid transparent;
+  }
+
+  .box {
+    width: 150px;
+    border-radius: 25px;
+    background-color: var(--dark-color);
+    color: #fff;
+    padding: 20px;
+    position: relative;
+    margin: 40px;
+    float: left;
+  }
+
+  .form-control::placeholder { 
+    color: rgb(161, 161, 161);
+    opacity: 1; /* Firefox */
+}
