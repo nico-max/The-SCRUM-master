@@ -134,7 +134,7 @@
           
           </v-col>
           <v-col md="12">
-            <TableBotVue></TableBotVue>
+            <TableBot></TableBot>
     
           </v-col>
         </v-row>
@@ -410,7 +410,10 @@ svg:hover #caraGroup {
   //var path = document.querySelector('.path');
 
   //import axios from 'axios'
-  import TableBotVue from '@/components/TableBot.vue';
+  //import TableBotVue from ;
+import TableBot from '@/components/TableBot.vue'
+//  import table-component from '@/components/TableBot.vue'
+
   export default{
     name: "Bot",
 
@@ -423,7 +426,9 @@ svg:hover #caraGroup {
       leftContent: ".",
       botColor: '#EEBE7B',
     }),
-
+    components: {
+      TableBot
+    },
     methods: {
       botClick() {
         
