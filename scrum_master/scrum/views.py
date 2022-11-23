@@ -9,335 +9,87 @@ from chatterbot.trainers import ListTrainer
 from rest_framework.response import Response
 from rest_framework import generics, status, mixins
 
+from django.conf import settings
+from scrum.models import *
 
-# Create your views here.
+import json
 
-@api_view(['GET'])
-@parser_classes([JSONParser])
-def llamar_bot(request):
-    #print(request.data['asd'])
-    chatbot = ChatBot('Ron Obvious')
-    print("creo el bot")
+class ChatterBotApiView(generics.GenericAPIView):
 
+    chatterbot = ChatBot('un bot')
+    trained = False
 
-    trainer = ListTrainer(chatbot)
+    def get(self, request):
+        #print(request.data['asd'])
+        #chatbot = ChatBot('Ron Obvious')
+        #print("creo el bot")
 
-    trainer.train([
-    'Hola', 
-    '¡Hola como estas, bienvenido a nuestra app movil!', 
-    'Holaa', 
-    '¡Hola como estas, bienvenido a nuestra app movil!', 
-    'Buenos dias!', 
-    '¡Hola como estas, bienvenido a nuestra app movil!',
-    'Buenos dias', 
-    '¡Hola como estas, bienvenido a nuestra app movil!',
-    'Buenas tardes!', 
-    '¡Hola como estas, bienvenido a nuestra app movil!',
-    'Buenas tardes', 
-    '¡Hola como estas, bienvenido a nuestra app movil!',
-    'Hola buenas', 
-    '¡Hola como estas, bienvenido a nuestra app movil!',
-    'Hola buenas tardes', 
-    '¡Hola como estas, bienvenido a nuestra app movil!',
-    'Hola buen dia', 
-    '¡Hola como estas, bienvenido a nuestra app movil!',
-    '¿Cuál es tu función?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    'Cuál es tu función?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    'Cual es tu función?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    '¿Para qué sirve este bot?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    'Para qué sirve este bot?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    '¿Para qué sirves?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    'Para qué sirves?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    'Que eres?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    'que eeres?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    'que erees?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    'Que es esto?',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    'que es esto',
-    'Mi función es aclarar dudas sobre la metodología y marco de trabajo adoptados por la empresa',
-    '¿Cuál es la metodología o marco de trabajo de la empresa?',
-    'Se utiliza Scrum. Te puedo dar más detalles de scrum si quieres',
-    '¿Cuál es la metodología?',
-    'Se utiliza Scrum. Te puedo dar más detalles de scrum si quieres',
-    'metodología?',
-    'Se utiliza Scrum. Te puedo dar más detalles de scrum si quieres',
-    'metodologia?',
-    'Se utiliza Scrum. Te puedo dar más detalles de scrum si quieres',
-    '¿metodología?',
-    'Se utiliza Scrum. Te puedo dar más detalles de scrum si quieres',
-    'metodología',
-    'Se utiliza Scrum. Te puedo dar más detalles de scrum si quieres',
-    'marco de trabajo?',
-    'Se utiliza Scrum. Te puedo dar más detalles de scrum si quieres',
-    'marco de trabajo',
-    'Se utiliza Scrum. Te puedo dar más detalles de scrum si quieres',
-    'Quiero más detalles',
-    'Prueba hacerme una pregunta acerca de la metodología Scrum, o coponentes como Sprints, Backlog o Roles por ejemplo',
-    'Quiero saber mas',
-    'Prueba hacerme una pregunta acerca de la metodología Scrum, o coponentes como Sprints, Backlog o Roles por ejemplo',
-    'Dime mas',
-    'Prueba hacerme una pregunta acerca de la metodología Scrum, o coponentes como Sprints, Backlog o Roles por ejemplo',
-    'Si quiero mas detalles',
-    'Prueba hacerme una pregunta acerca de la metodología Scrum, o coponentes como Sprints, Backlog o Roles por ejemplo',
-    'Si por favor',
-    'Prueba hacerme una pregunta acerca de la metodología Scrum, o coponentes como Sprints, Backlog o Roles por ejemplo',
-    '¿Me ayudarás con mis dudas?',
-    '¡Claro que si! Prueba hacerme una pregunta acerca de la metodología Scrum, o coponentes como Sprints, Backlog o Roles por ejemplo',
-    'Me ayudarás con mis dudas?',
-    '¡Claro que si! Prueba hacerme una pregunta acerca de la metodología Scrum, o coponentes como Sprints, Backlog o Roles por ejemplo',
-    'Puedo hacerte una pregunta?',
-    '¡Claro que si! Prueba hacerme una pregunta acerca de la metodología Scrum, o coponentes como Sprints, Backlog o Roles por ejemplo',
-    'Tengo preguntas',
-    '¡Claro que si! Prueba hacerme una pregunta acerca de la metodología Scrum, o coponentes como Sprints, Backlog o Roles por ejemplo',
-    '¿Qué es Scrum?',
-    'Es un marco de trabajo colaborativo para equipos basado en reuniones periodicas',
-    'Qué es Scrum?',
-    'Es un marco de trabajo colaborativo para equipos basado en reuniones periodicas',
-    'Que es Scrum?',
-    'Es un marco de trabajo colaborativo para equipos basado en reuniones periodicas',
-    'Que es Scrum',
-    'Es un marco de trabajo colaborativo para equipos basado en reuniones periodicas',
-    'Scrum',
-    'Es un marco de trabajo colaborativo para equipos basado en reuniones periodicas',
-    '¿Por qué se usa Scrum en la empresa?',
-    'Porque al ser una metodología ágil, permite actualizacion y asignación de tareas mediante la comunicación entre cliente y equipo',
-    '¿Por qué Scrum?',
-    'Porque al ser una metodología ágil, permite actualizacion y asignación de tareas mediante la comunicación entre cliente y equipo',
-    'Por qué Scrum?',
-    'Porque al ser una metodología ágil, permite actualizacion y asignación de tareas mediante la comunicación entre cliente y equipo',
-    '¿Por qué Scrum?',
-    'Porque al ser una metodología ágil, permite actualizacion y asignación de tareas mediante la comunicación entre cliente y equipo',
-    '¿Por qué deberia usar Scrum?',
-    'Porque al ser una metodología ágil, permite actualizacion y asignación de tareas mediante la comunicación entre cliente y equipo',
-    'Por qué deberia usar Scrum?',
-    'Porque al ser una metodología ágil, permite actualizacion y asignación de tareas mediante la comunicación entre cliente y equipo',
-    '¿Reuniones períodicas?',
-    'Scrum consta de diversos tipos de reuniones, dentro de ellos se encuentran los daily Scrum y planeación o revisión de Sprints ',
-    'Reuniones períodicas?',
-    'Scrum consta de diversos tipos de reuniones, dentro de ellos se encuentran los daily Scrum y planeación o revisión de Sprints ',
-    'Reuniones?',
-    'Scrum consta de diversos tipos de reuniones, dentro de ellos se encuentran los daily Scrum y planeación o revisión de Sprints ',
-    'Reuniones',
-    'Scrum consta de diversos tipos de reuniones, dentro de ellos se encuentran los daily Scrum y planeación o revisión de Sprints ',
-    '¿Qué es un sprint?',
-    'Un sprint es un período breve de tiempo fijo en el que un equipo de scrum trabaja para completar una cantidad de trabajo establecida. Es una iteración',
-    '¿sprint?',
-    'Un sprint es un período breve de tiempo fijo en el que un equipo de scrum trabaja para completar una cantidad de trabajo establecida. Es una iteración',
-    'sprint?',
-    'Un sprint es un período breve de tiempo fijo en el que un equipo de scrum trabaja para completar una cantidad de trabajo establecida. Es una iteración',
-    'sprint',
-    'Un sprint es un período breve de tiempo fijo en el que un equipo de scrum trabaja para completar una cantidad de trabajo establecida. Es una iteración',
-    'Sprint',
-    'Un sprint es un período breve de tiempo fijo en el que un equipo de scrum trabaja para completar una cantidad de trabajo establecida. Es una iteración',
-    '¿Cómo se define el tiempo que dura el sprint?',
-    'El tiempo del sprint se define dependiendo de la prioridad de las tareas y su duración. Sin embargo, este es un ciclo corto que suele durar de una semana a 15 días',
-    '¿Cuanto dura el sprint?',
-    'El tiempo del sprint se define dependiendo de la prioridad de las tareas y su duración. Sin embargo, este es un ciclo corto que suele durar de una semana a 15 días',
-    'Cuanto dura el sprint?',
-    'El tiempo del sprint se define dependiendo de la prioridad de las tareas y su duración. Sin embargo, este es un ciclo corto que suele durar de una semana a 15 días',
-    'Duración del sprint?',
-    'El tiempo del sprint se define dependiendo de la prioridad de las tareas y su duración. Sin embargo, este es un ciclo corto que suele durar de una semana a 15 días',
-    'duración del sprint',
-    'El tiempo del sprint se define dependiendo de la prioridad de las tareas y su duración. Sin embargo, este es un ciclo corto que suele durar de una semana a 15 días',
-    '¿Hay un tiempo máximo o mínimo para el desarrollo del sprint?',
-    'Hay un tiempo máximo permitido, pero no hay un tiempo mínimo',
-    'tiempo máximo del sprint?',
-    'Hay un tiempo máximo permitido, pero no hay un tiempo mínimo',
-    'tiempo mínimo del sprint?',
-    'Hay un tiempo máximo permitido, pero no hay un tiempo mínimo',
-    '¿Hay un tiempo máximo del sprint?',
-    'Hay un tiempo máximo permitido, pero no hay un tiempo mínimo',
-    'Hay un tiempo máximo del sprint?',
-    'Hay un tiempo máximo permitido, pero no hay un tiempo mínimo',
-    '¿Hay un tiempo mínimo del sprint?',
-    'Hay un tiempo máximo permitido, pero no hay un tiempo mínimo',
-    'Hay un tiempo mínimo del sprint?',
-    'Hay un tiempo máximo permitido, pero no hay un tiempo mínimo',
-    'Tiempo para el desarrollo del sprint?',
-    'Hay un tiempo máximo permitido, pero no hay un tiempo mínimo',
-    'Tiempo para el desarrollo del sprint',
-    'Hay un tiempo máximo permitido, pero no hay un tiempo mínimo',
-    '¿Cuál es la diferencia entre metodología ágil y scrum?',
-    'La metodología ágil constituye una serie de principios y la metodología scrum es un marco de trabajo para conseguir resultados.',
-    'Cuál es la diferencia entre metodología ágil y scrum?',
-    'La metodología ágil constituye una serie de principios y la metodología scrum es un marco de trabajo para conseguir resultados.',
-    'diferencia entre metodología ágil y scrum?',
-    'La metodología ágil constituye una serie de principios y la metodología scrum es un marco de trabajo para conseguir resultados.',
-    'diferencia entre metodología ágil y scrum?',
-    'La metodología ágil constituye una serie de principios y la metodología scrum es un marco de trabajo para conseguir resultados.',
-    'diferencia entre metodología ágil y scrum',
-    'La metodología ágil constituye una serie de principios y la metodología scrum es un marco de trabajo para conseguir resultados.',
-    'metodología ágil y scrum',
-    'La metodología ágil constituye una serie de principios y la metodología scrum es un marco de trabajo para conseguir resultados.',
-    '¿Qué es un scrum daily?',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    'Qué es un scrum daily?',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    'Que es un scrum daily?',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    '¿Qué es un daily scrum?',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    'Qué es un daily scrum?',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    'Que es un daily scrum?',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    'Que es un daily scrum',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    'daily?',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    'daily scrum',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    'scrum daily',
-    'Son unas reuniones cortas diarias usadas para mantener comunicación acerca del avance de las tareas',
-    '¿Qué es un backlog?',
-    'Es una lista de trabajo ordenada por prioridades',
-    'Qué es un backlog?',
-    'Es una lista de trabajo ordenada por prioridades',
-    'Que es un backlog?',
-    'Es una lista de trabajo ordenada por prioridades',
-    'Que es el backlog?',
-    'Es una lista de trabajo ordenada por prioridades',
-    'backlog?',
-    'Es una lista de trabajo ordenada por prioridades',
-    'backlog',
-    'Es una lista de trabajo ordenada por prioridades',
-    'y el backlog',
-    'Es una lista de trabajo ordenada por prioridades',
-    'y el backlog?',
-    'Es una lista de trabajo ordenada por prioridades',
-    '¿Quien crea el backlog?',
-    'El backlog debe ser realizado por el propietario del producto',
-    'Quien crea el backlog?',
-    'El backlog debe ser realizado por el propietario del producto',
-    'Quien hace el backlog?',
-    'El backlog debe ser realizado por el propietario del producto',
-    '¿Cómo creo un backlog?',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    'Cómo creo un backlog?',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    'Como creo un backlog?',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    'Como creo un backlog',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    '¿Cómo hago un backlog?',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    'Cómo hago un backlog?',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    'Como hago un backlog?',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    'Como hago un backlog',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    '¿Cómo se hace un backlog?',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    'Cómo se hace un backlog?',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    'Como se hace un backlog?',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    'Como se hace un backlog',
-    'Las historias de usuario se organizan en una o varias épicas a modo de lista',
-    '¿En dónde creo el backlog?',
-    'En la herramienta taiga se describen los detalles del proyecto para su acceso por parte del equipo',
-    'En dónde creo el backlog?',
-    'En la herramienta taiga se describen los detalles del proyecto para su acceso por parte del equipo',
-    'donde puedo crear el backlog?',
-    'En la herramienta taiga se describen los detalles del proyecto para su acceso por parte del equipo',
-    'donde puedo hacer el backlog?',
-    'En la herramienta taiga se describen los detalles del proyecto para su acceso por parte del equipo',
-    '¿Cómo se usa la herramienta taiga para crear un backlog?',
-    'Una vez en la página, seleccionas el proyecto y buscas la opcion de backlog',
-    'Cómo se usa la herramienta taiga para crear un backlog?',
-    'Una vez en la página, seleccionas el proyecto y buscas la opcion de backlog',
-    'Como se usa la herramienta taiga para crear un backlog?',
-    'Una vez en la página, seleccionas el proyecto y buscas la opcion de backlog',
-    'Como se usa la herramienta taiga para crear un backlog',
-    'Una vez en la página, seleccionas el proyecto y buscas la opcion de backlog',
-    'como creo un backlog en taiga?',
-    'Una vez en la página, seleccionas el proyecto y buscas la opcion de backlog',
-    'como creo un backlog en taiga',
-    'Una vez en la página, seleccionas el proyecto y buscas la opcion de backlog',
-    'backlog en taiga',
-    'Una vez en la página, seleccionas el proyecto y buscas la opcion de backlog',
-    '¿Cómo se define la prioridad de las tareas?',
-    'Puede ser hecha de distintas formas. Entre ellas destaca la prioridad del cliente y la dificultad discutida dentro del equipo',
-    'Cómo se define la prioridad de las tareas?',
-    'Puede ser hecha de distintas formas. Entre ellas destaca la prioridad del cliente y la dificultad discutida dentro del equipo',
-    'Como se define la prioridad de las tareas?',
-    'Puede ser hecha de distintas formas. Entre ellas destaca la prioridad del cliente y la dificultad discutida dentro del equipo',
-    'como le doy prioridad a las tareas?',
-    'Puede ser hecha de distintas formas. Entre ellas destaca la prioridad del cliente y la dificultad discutida dentro del equipo',
-    '¿Que pasa si no se cumple con el sprint en el tiempo definido?',
-    'Debe verse como una tarea empírica y de suposición, por lo que en principio las tareas se pueden relegar y reevaluar para el siguiente sprint, pero teniendo en cuenta lo aprendido para mejorar la situación',
-    'Que pasa si no se cumple con el sprint en el tiempo definido?',
-    'Debe verse como una tarea empírica y de suposición, por lo que en principio las tareas se pueden relegar y reevaluar para el siguiente sprint, pero teniendo en cuenta lo aprendido para mejorar la situación',
-    'Que pasa si no se cumple con el tiempo definido para el sprint?',
-    'Debe verse como una tarea empírica y de suposición, por lo que en principio las tareas se pueden relegar y reevaluar para el siguiente sprint, pero teniendo en cuenta lo aprendido para mejorar la situación',
-    '¿Que pasa si se incumple con el tiempo definido para el sprint?',
-    'Debe verse como una tarea empírica y de suposición, por lo que en principio las tareas se pueden relegar y reevaluar para el siguiente sprint, pero teniendo en cuenta lo aprendido para mejorar la situación',
-    'Que pasa si se incumple con el tiempo definido para el sprint?',
-    'Debe verse como una tarea empírica y de suposición, por lo que en principio las tareas se pueden relegar y reevaluar para el siguiente sprint, pero teniendo en cuenta lo aprendido para mejorar la situación',
-    '¿Cómo se hace la revisión del sprint?',
-    'Los miembros del equipo se reúnen en torno a un escritorio para demostraciones informales y describen el trabajo que están realizando para esa iteración',
-    'Cómo se hace la revisión del sprint?',
-    'Los miembros del equipo se reúnen en torno a un escritorio para demostraciones informales y describen el trabajo que están realizando para esa iteración',
-    'Como se hace la revisión del sprint?',
-    'Los miembros del equipo se reúnen en torno a un escritorio para demostraciones informales y describen el trabajo que están realizando para esa iteración',
-    'Como se hace la revisión del sprint?',
-    'Los miembros del equipo se reúnen en torno a un escritorio para demostraciones informales y describen el trabajo que están realizando para esa iteración',
-    'Como se revisa el sprint?',
-    'Los miembros del equipo se reúnen en torno a un escritorio para demostraciones informales y describen el trabajo que están realizando para esa iteración',
-    'Como reviso el sprint?',
-    'Los miembros del equipo se reúnen en torno a un escritorio para demostraciones informales y describen el trabajo que están realizando para esa iteración',
-    '¿Qué se revisa en el sprint review?',
-    'Se formulan algunas preguntas, se prueban nuevas funcionalidades y se ofrece feedback. Dentro de ello se comparte el éxito del ciclo',
-    'Qué se revisa en el sprint review?',
-    'Se formulan algunas preguntas, se prueban nuevas funcionalidades y se ofrece feedback. Dentro de ello se comparte el éxito del ciclo',
-    'Que se revisa en el sprint review?',
-    'Se formulan algunas preguntas, se prueban nuevas funcionalidades y se ofrece feedback. Dentro de ello se comparte el éxito del ciclo',
-    'Que se hace en el sprint review?',
-    'Se formulan algunas preguntas, se prueban nuevas funcionalidades y se ofrece feedback. Dentro de ello se comparte el éxito del ciclo',
-    '¿Qué se tiene en cuenta en la revisión de un sprint?',
-    'Las revisiones de sprints no son retrospectivas. Una revisión de sprint consiste en demostrar el duro trabajo de todo un equipo: diseñadores, desarrolladores y el propietario del producto',
-    'Qué se tiene en cuenta en la revisión de un sprint?',
-    'Las revisiones de sprints no son retrospectivas. Una revisión de sprint consiste en demostrar el duro trabajo de todo un equipo: diseñadores, desarrolladores y el propietario del producto',
-    'Que se tiene en cuenta en la revisión de un sprint?',
-    'Las revisiones de sprints no son retrospectivas. Una revisión de sprint consiste en demostrar el duro trabajo de todo un equipo: diseñadores, desarrolladores y el propietario del producto',
-    '¿Cuál es el objetivo de la revisión del sprint?',
-    'Ofrecer retroalimentación y valorar el trabajo del equipo en el sprint, para mejorar en el siguiente en caso de haber mejoras',
-    '¿Cuáles son los roles de Scrum?',
-    'Principalmente se destacan Product Owner o dueño del producto, Scrum master y equipo de desarrollo',
-    '¿Qué hace el Product owner?',
-    'También se conoce como dueño del producto, y es el encargado de optimizar y maximizar el valor del producto, siendo la persona encargada de gestionar el flujo de valor del producto a través del Product Backlog',
-    '¿Qué hace el dueño del producto?',
-    'También se conoce como product owner, y es el encargado de optimizar y maximizar el valor del producto, siendo la persona encargada de gestionar el flujo de valor del producto a través del Product Backlog',
-    '¿Que es el scrum master?',
-    'Es el encargado de gestionar el proceso Scrum y eliminar impedimentos',
-    '¿Qué es el equipo de desarrollo?',
-    'Se trade de 3 a 9 profesionales que se encargan de desarrollar el producto, auto-organizándose y auto-gestionándose para conseguir entregar un incremento de software',
-    'Necesito más información',
-    'Prueba hacerme otras preguntas. Sin embargo, también te recomiendo esta página para otras dudas relacionadas: https://www.atlassian.com/es/agile/scrum',
-    'Adiós',
-    '¿Ya te vas? Que mal, ¡espero que me vuelvas a visitar si tienes alguna duda!',
-    'Adiós gracias',
-    '¿Ya te vas? Que mal, ¡espero que me vuelvas a visitar si tienes alguna duda!',
-    'Hasta luego',
-    '¿Ya te vas? Que mal, ¡espero que me vuelvas a visitar si tienes alguna duda!',
-    'Gracias',
-    '¡No hay problema! ¡espero que me vuelvas a preguntar algo si tienes alguna duda!',
+        input_data = json.loads(request.body.decode('utf-8'))
+        input_ = input_data.get("input")
+        print(input_)
 
-    ]) 
+        """
+        trainer = ChatterBotCorpusTrainer(self.chatterbot)
 
-    respuesta = chatbot.get_response("Hola")
+        if not self.trained:
+            print("no ha sido entrenado")
+            print("ENTRENANDO...")
+            
+            trainer.train(
+                "{}scrum1.txt".format(settings.MEDIA_ROOT),
+            )
 
-    print(respuesta)
+            self.trained = True
+        """
+        
+        response = self.chatterbot.get_response(input_)
+
+        print(response)
+
+        return Response(status=status.HTTP_200_OK)
+
+    def post(self, request):
+
+        self.chatterbot.storage.drop()
+
+        title_ = request.data['title']
+        desc_ = request.data['desc']
+
+        newModel = TrainModel(title=title_, desc=desc_, plain_doc=request.FILES['document'])
+        newModel.save()
+
+        trainer = ListTrainer(self.chatterbot)
+
+        file = open('.{}'.format(newModel.plain_doc.url))
+
+        trainer.train([ line for line in file ])
+
+        return Response(status=status.HTTP_200_OK)
+
     
-    return Response(status=status.HTTP_200_OK)
+    def put(self, request):
+
+        idDoc = request.data['pk']
+
+        trainedModel = TrainModel.objects.get(pk=idDoc)
+
+        if trainedModel is not None:
+            self.chatterbot.storage.drop()
+
+            trainer = ListTrainer(self.chatterbot)
+
+            file = open('.{}'.format(trainedModel.plain_doc.url))
+
+            trainer.train([ line for line in file ])
+
+            return Response(status=status.HTTP_200_OK)
+        
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+    def delete(self, request):
+
+        self.chatterbot.storage.drop()
+
+        return Response(status=status.HTTP_200_OK)
+

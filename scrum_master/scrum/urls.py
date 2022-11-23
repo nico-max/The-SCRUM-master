@@ -6,5 +6,5 @@ from django.conf.urls.static import static
 app_name='bot'
 
 urlpatterns = [
-    path('question/', views.llamar_bot, name='question'),
+    path('conversation/', views.ChatterBotApiView.as_view(), name='question'),
 ]

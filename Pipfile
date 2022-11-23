@@ -7,6 +7,9 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 chatterbot = "==1.0.4"
+psycopg2 = "*"
+psycopg2-binary = "*"
+pillow = "*"
 
 [dev-packages]
 
