@@ -10,6 +10,7 @@ chatterbot = "==1.0.4"
 psycopg2 = "*"
 psycopg2-binary = "*"
 pillow = "*"
+django-cors-headers = "==3.8.0"
 
 [dev-packages]
 

@@ -1,4 +1,5 @@
 <template>
+  <div>
   <v-container class="fill-height w-auto p-0 m-0">
     
 
@@ -142,6 +143,7 @@
     
     
   </v-container>
+</div>
 </template>
 
 <style scoped>
@@ -440,7 +442,7 @@ import TableBot from '@/components/TableBot.vue'
         const rando = this.colors[Math.floor(Math.random() * this.colors.length)];
         this.botColor = rando;
         console.log("click "+ this.botColor)
-        this.conversar();
+        this.getConver();
       },
       removeClass() {
         this.bocaGroupClass = "";
@@ -453,14 +455,34 @@ import TableBot from '@/components/TableBot.vue'
           
           var dataReq = '{"input":"Hola"}';
           var headersReq =  {  "access-control-allow-origin": "*", "access-control-allow-headers": "*", "access-control-allow-methods": "*"};
-          const response = await axios({url:'http://localhost:8000/bot/conversation/', data:dataReq, method:"GET", headers:headersReq})
+          const response = await axios({url:'http://127.0.0.1:8000/bot/conversation/', data:dataReq, method:"GET", headers:headersReq})
             .then(response => (this.leftContent = response))
-          
+          console.log(response)
           
         } catch (error) {
           console.error(error);
         }
-      }
+      },
+
+      async getConver() {
+      let request = {
+        method: "get",
+        params: {},
+        data: {"input": "hola"},
+        url: "http://127.0.0.1:8000/bot/conversation",
+      };
+      (this.responseTitle = "Respuesta"),
+        await this.$store
+          .dispatch("request_back", request)
+          .then((value) => {
+            //this.items_empresa = value.data;
+            //this.responseText = "Se han cargado las empresas";
+            console.log(value.data)
+          })
+          .catch(function (error) {
+            this.responseText = "No se pudo cargar las empresas: " + error;
+          });
+    },
 
     },
 

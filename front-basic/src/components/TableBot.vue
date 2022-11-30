@@ -1,4 +1,5 @@
 <template>
+  <div>
   <v-file-input
                 
     placeholder="Subir modelo"
@@ -158,6 +159,7 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+      </div>
 </template>
   
 <script >

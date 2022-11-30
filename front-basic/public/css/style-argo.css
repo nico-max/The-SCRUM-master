@@ -1,0 +1,72 @@
+.argo-container-secondary {
+    background: #F5F5F6!important;
+    padding: 10px;
+
+}
+
+.argo-secondary-light {
+  background: #deffff!important;
+  color: #deffff!important;
+}
+.argo-secondary-dark {
+  background: #7b9da7!important;
+  
+}
+
+.argo-tab-item {
+  color:#accfd9;
+  background:#accfd9;
+}
+
+
+.argo-component {
+  background: #FFFFFF!important;
+  padding: 30px;
+  border: 1px solid rgba(204,186,184,0.4)!important;
+  border-radius: 5px!important;
+}
+
+.argo-body {
+  background: #EEEEEE!important;
+  padding: 10px;
+
+}
+.argo-components {
+    box-sizing: border-box;
+    display: flex;
+    font-family: Roboto;
+    margin: 64px auto;
+    width: 1664px;
+  }
+
+  .argo-card-primary {
+    
+    background:var(--v-background-base)!important;
+    border-radius: 25px!important;
+  }
+
+  .argo-card-accent {
+    color:#05AA77;
+    background:#05AA77!important;
+    border-radius: 25px!important;
+  }
+
+
+  .argo-card-secondary-light {
+    /**background:rgba(217, 217, 217, 0.45)!important;**/
+    border-radius: 25px!important;
+    
+    /**border: 1px solid rgba(0, 0, 0, 0.45)!important**/
+  }
+
+  .argo-card-primary-light {
+    color:#183958;
+    background:#183958!important;
+    border-radius: 25px!important;
+  }
+
+  .mod-padding-0{
+    padding: 0%!important;
+  }
+
+  
