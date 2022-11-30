@@ -11,21 +11,29 @@ from rest_framework import generics, status, mixins
 
 from django.conf import settings
 from scrum.models import *
+from scrum.serializers import *
 
 import json
 
 class ChatterBotApiView(generics.GenericAPIView):
 
+    queryset = TrainModel.objects.all()
+    serializer_class = TrainedModelSerializer
+
     chatterbot = ChatBot('un bot')
     trained = False
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         #print(request.data['asd'])
         #chatbot = ChatBot('Ron Obvious')
         #print("creo el bot")
 
-        input_data = json.loads(request.body.decode('utf-8'))
-        input_ = input_data.get("input")
+        #input_data = json.loads(request.body.decode('utf-8'))
+        #input_ = input_data.get("input")
+        print(request.data)
+        input_ = request.data['input']
+        #data = json.loads(request.data)
+        #print(data)
         print(input_)
 
         """
@@ -67,11 +75,26 @@ class ChatterBotApiView(generics.GenericAPIView):
         return Response(status=status.HTTP_200_OK)
 
     
-    def put(self, request):
+    def delete(self, request):
+
+        self.chatterbot.storage.drop()
+
+        return Response(status=status.HTTP_200_OK)
+
+
+
+class ChatterBotApiDetail(generics.GenericAPIView):
+
+    queryset = TrainModel.objects.all()
+    serializer_class = TrainedModelSerializer
+
+    chatterbot = ChatBot('un bot')
+    
+    def put(self, request, pk):
 
         idDoc = request.data['pk']
 
-        trainedModel = TrainModel.objects.get(pk=idDoc)
+        trainedModel = TrainModel.objects.get(pk=pk)
 
         if trainedModel is not None:
             self.chatterbot.storage.drop()
@@ -86,10 +109,4 @@ class ChatterBotApiView(generics.GenericAPIView):
         
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-
-    def delete(self, request):
-
-        self.chatterbot.storage.drop()
-
-        return Response(status=status.HTTP_200_OK)
 
