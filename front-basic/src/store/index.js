@@ -1,14 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import urlConfig from "./url-config";
-import radicadoUrlConfig from "./radicado-url-config";
-import organizacionalUrlConfig from "./organizacional-url-config";
-("@/url-congig");
 import axios from "axios";
 
-/** (Provisional) Conexión hacia Back End
+/** 
  */
-axios.defaults.headers.common["Authorization"] = "";
+
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.crossdomain = true;
 
@@ -18,11 +14,8 @@ export default new Vuex.Store({
   state: {
     user: null,
     auth: false,
-    //URLs separadas
-    //Array de URL
-    paths: urlConfig,
-    radicado_routes: radicadoUrlConfig,
-    organizacional_routes: organizacionalUrlConfig,
+    
+
   },
   mutations: {
     SET_USER(state, user) {
@@ -47,6 +40,21 @@ export default new Vuex.Store({
           var data = response.data;
 
           return dispatch("getUser", data);
+        })
+        .catch((error) => {
+          throw error;
+        });
+      //return dispatch("getUser", data);
+    },
+    async saber( data) {
+      await axios
+        .post('http://f9fe-34-73-63-229.ngrok.io/bot', {
+          body: data
+        })
+        .then((response) => {
+          //var data = response.data;
+
+          console.log(response);
         })
         .catch((error) => {
           throw error;
@@ -79,12 +87,13 @@ export default new Vuex.Store({
      */
     request_back(context, request) {
       return new Promise((resolve, reject) => {
+        axios.defaults.headers.common["Authorization"] = "*";
         let u = request.url;
         let d = request.data;
         let m = request.method;
-        let p = request.params;
+        let p = request.headers;
 
-        axios({ url: u, data: d, method: m, params: p }).then(
+        axios({ url: u, data: d, method: m, headers: p }).then(
           function (resp) {
             resolve(resp);
           },
