@@ -1,102 +1,104 @@
 <template>
   <div>
-  <v-container class="fill-height w-auto p-0 m-0">
-    
+    <v-container class="fill-height w-auto p-0 m-0">
+      <v-toolbar
+        dense
+        floating
+        class="primary"
+        dark
+      >
+        Bienvenido, soy el Rules Bot
 
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class=" bg-primary p-4">
-          <h5 class="text-white h4">Collapsed content</h5>
-          <span class="text-muted">Toggleable via the navbar brand.</span>
-        </div>
-      </div>
-      <nav class="navbar navbar-dark bot-gradient ">
-        <div class="container-fluid ">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </nav>
+        <v-btn class="mx-4" icon>
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>
+      </v-toolbar>
 
-
-        <v-row>
-          <v-col md="4">
-            
-            <div class="box arrow-right">
-              <v-card class="primary p-2" color="primary">
-                {{leftContent}}
-              </v-card>
-            </div>
+      <v-row align="center"
+      justify="center">
+        <v-col  md="4" fluid>
+          
+            <div v-if="leftContent !== ''" class="box arrow-right" :style="'width:100%'">
+              <v-card dark color="primary lighten-1" fluid class=" elevation-0 pa-6 rounded-lg d-flex align-right justify-end rounded-pill"
+                min-height="100px">
+              {{ leftContent }}
               
-          </v-col>
-          <v-col md="4">
-            <div id="bot">
-      
-                <svg
-                  width="307.2pt"
-                  height="457.2pt"
-                  viewBox="0 0 307.2 307.2"
-                  
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g id="botGroup">
-                      <g id="caraGroup">
-                          <path
-                              id="cara"
-                              opacity="0.8"
-                              :class="caraClass"
-                              :fill="botColor"
-                              :stroke="botColor"
-                              stroke-width="2"
-                              transform="translate(47.0399981118145, 44.6399982081505)"
-                              d="M6.24 97.44L0.48 69.6L45.12 64.8L40.32 78.72L58.08 87.84L81.6 79.2L78.72 65.76L60.48 49.92L46.56 60.48L0 63.84L20.16 17.28L67.2 1.92L141.6 0L191.04 24.96L195.36 63.84L149.28 58.08L128.16 42.24L106.56 61.92L116.16 79.2L144.96 81.6L151.68 65.28L195.36 69.6L183.84 98.4Z"
-                          />
-                          <g id="ojosGroup" :class="ojosGroupClass">
-                              <path
-                                  id="ojoIzq"
-                                  opacity="1"
-                                  class="path"
-                                  :fill="botColor"
-                                  :stroke="botColor"
-                                  transform="translate(95.0351496238657, 103.350725215954)" 
-                                  d="M4.75176 18.8373L0 8.9944L11.0309 0L20.8738 11.7097L11.7097 20.8738Z" 
-                              />
-                              <path
-                                  id="ojoDer"
-                                  opacity="1"
-                                  class="path"
-                                  :fill="botColor"
-                                  :stroke="botColor"
-                                  transform="translate(166.141806217437, 94.695738375209)" 
-                                  d="M9.50351 20.3647L0 10.352L11.54 0L28.1711 12.3885L20.0253 23.5891Z"
-                              />
-                          </g>
-                      </g>
-                    <g id="bocaGroupHover">
-                      <g id="bocaGroup" :class="bocaGroupClass" v-on:animationend="removeClass()">
-                          <path
-                          id="boca"
-                          opacity="0.8"
-                          class="path"
-                          :fill="botColor"
-                          :stroke="botColor"
-                          transform="matrix(0.999999971671202 0 0 0.999999971671202 45.1199986547914 161.279990730271)"
-                          d="M171.933 6.89828L184.08 0L194.88 31.2L144.96 60L46.56 56.16L6.72 27.36L0 0.480005L18.24 5.28L30.24 25.92L41.28 24.96L41.76 5.28L59.52 9.6L63.36 29.28L79.68 30.72L78.72 12.48L95.04 19.68L96.48 34.08L108.48 32.64L103.2 21.12L123.36 14.88L124.8 33.12L144.96 30.24L138.72 12.96L156.48 8.16L159.36 29.76L177.6 20.64Z"
-                          />
-                          <path
-                          id="mandibula"
-                          opacity="0.8"
-                          class="path"
-                          transform="translate(53.8799994906155, 195.279998112409)" 
-                          d="M0 0L24.48 42.48L90.24 54.48L158.4 46.32L185.724 3.03794L141.6 34.56L36.96 31.44Z"
-                          :fill="botColor"
-                          :stroke="botColor"
-                          />
-                      </g>
-                    </g>
+            </v-card>
+
+            </div>
+            
+          
+        </v-col>
+        <v-col md="4" align="center"> 
+          <div id="bot">
+            <svg
+              width="307.2pt"
+              height="457.2pt"
+              viewBox="0 0 307.2 307.2"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="botGroup">
+                <g id="caraGroup">
+                  <path
+                    id="cara"
+                    opacity="0.8"
+                    :class="caraClass"
+                    :fill="botColor"
+                    :stroke="botColor"
+                    stroke-width="2"
+                    transform="translate(47.0399981118145, 44.6399982081505)"
+                    d="M6.24 97.44L0.48 69.6L45.12 64.8L40.32 78.72L58.08 87.84L81.6 79.2L78.72 65.76L60.48 49.92L46.56 60.48L0 63.84L20.16 17.28L67.2 1.92L141.6 0L191.04 24.96L195.36 63.84L149.28 58.08L128.16 42.24L106.56 61.92L116.16 79.2L144.96 81.6L151.68 65.28L195.36 69.6L183.84 98.4Z"
+                  />
+                  <g id="ojosGroup" :class="ojosGroupClass">
+                    <path
+                      id="ojoIzq"
+                      opacity="1"
+                      class="path"
+                      :fill="botColor"
+                      :stroke="botColor"
+                      transform="translate(95.0351496238657, 103.350725215954)"
+                      d="M4.75176 18.8373L0 8.9944L11.0309 0L20.8738 11.7097L11.7097 20.8738Z"
+                    />
+                    <path
+                      id="ojoDer"
+                      opacity="1"
+                      class="path"
+                      :fill="botColor"
+                      :stroke="botColor"
+                      transform="translate(166.141806217437, 94.695738375209)"
+                      d="M9.50351 20.3647L0 10.352L11.54 0L28.1711 12.3885L20.0253 23.5891Z"
+                    />
                   </g>
-                  
-                </svg>
-                <!--<svg viewBox="0 0 340 333">
+                </g>
+                <g id="bocaGroupHover">
+                  <g
+                    id="bocaGroup"
+                    :class="bocaGroupClass"
+                    v-on:animationend="removeClass()"
+                  >
+                    <path
+                      id="boca"
+                      opacity="0.8"
+                      class="path"
+                      :fill="botColor"
+                      :stroke="botColor"
+                      transform="matrix(0.999999971671202 0 0 0.999999971671202 45.1199986547914 161.279990730271)"
+                      d="M171.933 6.89828L184.08 0L194.88 31.2L144.96 60L46.56 56.16L6.72 27.36L0 0.480005L18.24 5.28L30.24 25.92L41.28 24.96L41.76 5.28L59.52 9.6L63.36 29.28L79.68 30.72L78.72 12.48L95.04 19.68L96.48 34.08L108.48 32.64L103.2 21.12L123.36 14.88L124.8 33.12L144.96 30.24L138.72 12.96L156.48 8.16L159.36 29.76L177.6 20.64Z"
+                    />
+                    <path
+                      id="mandibula"
+                      opacity="0.8"
+                      class="path"
+                      transform="translate(53.8799994906155, 195.279998112409)"
+                      d="M0 0L24.48 42.48L90.24 54.48L158.4 46.32L185.724 3.03794L141.6 34.56L36.96 31.44Z"
+                      :fill="botColor"
+                      :stroke="botColor"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+            <!--<svg viewBox="0 0 340 333">
                   <path
                     class="path"
                     fill="white"
@@ -118,72 +120,236 @@
                   />
                 </svg>
                 -->
-              </div>
-              <div class="input-group mb-3">
-                <input type="text" id="question" class="form-control bg-outline-secondary" placeholder="H Hola, p pre gunta me Algo..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-primary" type="button" id="button-addon2" @click="botClick()">Preguntar</button>
-              </div>
-            </v-col>
-            <v-col md="4">
-           
-            <div class="box arrow-left">
-              <v-card class="primary p-2" color="primary">
-                {{rightContent}}
-              </v-card>
-            </div>
-              
+          </div>
           
+        </v-col>
+        <v-col  md="4" fluid>
+          <div  v-if="rightContent !== ''" class="box arrow-left" :style="'width:100%'">
+            <v-card dark color="primary lighten-1" fluid class=" elevation-0 pa-6 rounded-lg d-flex align-right justify-start rounded-pill"
+              min-height="100px">
+            {{ rightContent }}
+          </v-card>
+          </div>
+      </v-col>
+      <v-col md="12">
+      <div class="input-group mb-3">
+            
+            <v-btn
+              class="primary"
+              type="button"
+              id="button-addon2"
+              @click="botClick()"
+            >
+              Preguntar
+            </v-btn>
+            
+          </div>
           </v-col>
           <v-col md="12">
-            <TableBot></TableBot>
-    
-          </v-col>
-        </v-row>
-      
-    
-    
-  </v-container>
-</div>
+            <v-form ref="form" flat>
+            <v-text-field
+              v-model="mathematics"
+              placeholder="Matematicas"
+              label="Matematicas"
+              type="number"
+              :rules='[
+              (val) => !!val || "Debe ingresar un valor",
+
+              (val) =>
+                !val ||
+                val <= 100 && val >= 0 ||
+                "El valor debe ser numérico de 0 a 100",
+            ]'
+            >
+            </v-text-field>
+          
+            <v-text-field
+              v-model="written_expression"
+              placeholder="Escritura"
+              label="Escritura"
+              :rules='[
+              (val) => !!val || "Debe ingresar un valor",
+
+              (val) =>
+                !val ||
+                val <= 100 && val >= 0 ||
+                "El valor debe ser numérico de 0 a 100",
+            ]'
+            >
+            </v-text-field>
+            <v-text-field
+              v-model="natural_sciences"
+              placeholder="Ciencias Naturales"
+              label="Ciencias Naturales"
+              :rules='[
+              (val) => !!val || "Debe ingresar un valor",
+
+              (val) =>
+                !val ||
+                val <= 100 && val >= 0 ||
+                "El valor debe ser numérico de 0 a 100",
+            ]'
+            >
+            </v-text-field>
+          
+            <v-text-field
+              v-model="foreign_language"
+              placeholder="Lenguajes extranjeros"
+              label="Lenguajes extranjeros"
+              :rules='[
+              (val) => !!val || "Debe ingresar un valor",
+
+              (val) =>
+                !val ||
+                val <= 100 && val >= 0 ||
+                "El valor debe ser numérico de 0 a 100",
+            ]'
+            >
+            </v-text-field>
+            <v-text-field
+              v-model="social_sciences"
+              placeholder="Ciencias Sociales"
+              label="Ciencias Sociales"
+              :rules='[
+              (val) => !!val || "Debe ingresar un valor",
+
+              (val) =>
+                !val ||
+                val <= 100 && val >= 0 ||
+                "El valor debe ser numérico de 0 a 100",
+            ]'
+            >
+            </v-text-field>
+            <v-spacer></v-spacer>
+            Preferencias
+            <v-text-field
+              v-model="humanities"
+              placeholder="Humanidades"
+              label="Humanidades"
+              :rules='[
+              (val) => !!val || "Debe ingresar un valor",
+
+              (val) =>
+                !val ||
+                val <= 10 && val >= 0 ||
+                "El valor debe ser numérico de 0 a 10",
+            ]'
+            >
+            </v-text-field>
+            <v-text-field
+              v-model="engineering"
+              placeholder="Ingeniería"
+              label="Ingeniería"
+              :rules='[
+              (val) => !!val || "Debe ingresar un valor",
+
+              (val) =>
+                !val ||
+                val <= 10 && val >= 0 ||
+                "El valor debe ser numérico de 0 a 10",
+            ]'
+            >
+            </v-text-field>
+            <v-text-field
+              label="Ciencias"
+              v-model="science"
+              placeholder="Ciencia"
+              :rules='[
+              (val) => !!val || "Debe ingresar un valor",
+
+              (val) =>
+                !val ||
+                val <= 10 && val >= 0 ||
+                "El valor debe ser numérico de 0 a 10",
+            ]'
+            >
+            </v-text-field>
+            
+            <v-text-field
+              v-model="health"
+              label="Salud"
+              placeholder="Salud"
+              :rules='[
+              (val) => !!val || "Debe ingresar un valor",
+
+              (val) =>
+                !val ||
+                val <= 10 && val >= 0 ||
+                "El valor debe ser numérico de 0 a 10",
+            ]'
+            >
+            </v-text-field> 
+          </v-form>
+          <v-btn
+              class="primary"
+              type="button"
+              id="button-saber"
+              @click="saberRes()"
+            >
+              Saber
+            </v-btn>
+        </v-col>
+        <v-col md="12">
+          <TableBot></TableBot>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <style scoped>
-.stripe{
-    background: rgb(24,24,17);
-background: -moz-linear-gradient(90deg, rgba(24,24,17,1) 0%, rgba(117,118,131,1) 37%, rgba(120,88,40,1) 95%);
-background: -webkit-linear-gradient(90deg, rgba(24,24,17,1) 0%, rgba(117,118,131,1) 37%, rgba(120,88,40,1) 95%);
-background: linear-gradient(90deg, rgba(24,24,17,1) 0%, rgba(117,118,131,1) 37%, rgba(120,88,40,1) 95%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#181811",endColorstr="#785828",GradientType=1);
+.stripe {
+  background: rgb(24, 24, 17);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(24, 24, 17, 1) 0%,
+    rgba(117, 118, 131, 1) 37%,
+    rgba(120, 88, 40, 1) 95%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(24, 24, 17, 1) 0%,
+    rgba(117, 118, 131, 1) 37%,
+    rgba(120, 88, 40, 1) 95%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(24, 24, 17, 1) 0%,
+    rgba(117, 118, 131, 1) 37%,
+    rgba(120, 88, 40, 1) 95%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#181811",endColorstr="#785828",GradientType=1);
 
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .bot-gradient {
-    height:100px;
-    background: 
-      /* Color                         position     / width height */
-      linear-gradient(#25dbf3,#25dbf3) center right / 30%   70px, 
-     
-      linear-gradient(#1fa2ff,#1fa2ff) bottom left  / 40%   70px,
-      
-      linear-gradient(#5533ff,#5533ff) top left     / 30%   70px,
-      linear-gradient(#4553ff,#4553ff) top left     / 60%   70px,
-      linear-gradient(#4f40ff,#4f40ff) top left     / 100%  70px,
-      /* main background*/
+  height: 100px;
+  background: 
+      /* Color                         position     / width height */ linear-gradient(
+        #25dbf3,
+        #25dbf3
+      )
+      center right / 30% 70px,
+    linear-gradient(#1fa2ff, #1fa2ff) bottom left / 40% 70px,
+    linear-gradient(#5533ff, #5533ff) top left / 30% 70px,
+    linear-gradient(#4553ff, #4553ff) top left / 60% 70px,
+    linear-gradient(#4f40ff, #4f40ff) top left / 100% 70px,
+    /* main background*/
       linear-gradient(150deg, #53f 15%, #05d5ff 70%, #a6ffcb 94%);
-    background-repeat:no-repeat;
-    transform:skewY(-10deg) translateY(-20%);
-    transform-origin:left ;
-  }
+  background-repeat: no-repeat;
+  transform: skewY(-10deg) translateY(-20%);
+  transform-origin: left;
+}
 
 :root {
   --dark-color: #635bff;
-  --light-color: #EEBE7B;
+  --light-color: #eebe7b;
 }
 svg {
   cursor: pointer;
   /**filter: drop-shadow(3px 5px 4px rgb(0 0 0 / 0.2));**/
 }
-
 
 /**
   Animacion de Hover
@@ -212,46 +378,46 @@ svg:hover #caraGroup {
   Animacion 1
 */
 @keyframes abrirIzq {
-    100%,
-    70%,
-    50%,
-    30%  {
+  100%,
+  70%,
+  50%,
+  30% {
     transform: rotate(0deg) translateX(15%) translateY(15%);
   }
   20%,
-    40%,
-    60%,
-    80%{
+  40%,
+  60%,
+  80% {
     transform: translateX(35%) translateY(-10%) rotate(30deg);
   }
 }
 
 @keyframes abrirIzqOjos {
-    100%,
-    70%,
-    50%,
-    30%  {
+  100%,
+  70%,
+  50%,
+  30% {
     transform: rotate(0deg) translateX(-0%) translateY(0%);
   }
   20%,
-    40%,
-    60%,
-    80% {
+  40%,
+  60%,
+  80% {
     transform: translateX(30%) translateY(-30%) rotate(30deg);
   }
 }
 
 @keyframes abrirIzqBoca {
-    100%,
-    70%,
-    50%,
-    30% {
+  100%,
+  70%,
+  50%,
+  30% {
     transform: rotate(0deg) translateX(-0%) translateY(0%);
   }
   20%,
-    40%,
-    60%,
-    80% {
+  40%,
+  60%,
+  80% {
     transform: translateX(-10%) translateY(30%) rotate(-20deg);
   }
 }
@@ -260,49 +426,49 @@ svg:hover #caraGroup {
   Animacion 2
 */
 @keyframes abrirDer {
-    100%,
-    70%,
-    50%,
-    30% {
-      transform: rotate(0deg) translateX(15%) translateY(15%);
-    }
-    20%,
-    40%,
-    60%,
-    80% {
-      transform: translateX(5%) translateY(20%) rotate(-30deg);
-    }
+  100%,
+  70%,
+  50%,
+  30% {
+    transform: rotate(0deg) translateX(15%) translateY(15%);
   }
-  
-  @keyframes abrirDerOjos {
-    100%,
-    70%,
-    50%,
-    30% {
-      transform: rotate(0deg) translateX(-0%) translateY(0%);
-    }
-    20%,
-    40%,
-    60%,
-    80% {
-      transform: translateX(-15%) translateY(10%) rotate(-25deg);
-    }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5%) translateY(20%) rotate(-30deg);
   }
-  
-  @keyframes abrirDerBoca {
-    100%,
-    70%,
-    50%,
-    30% {
-      transform: rotate(0deg) translateX(-0%) translateY(0%);
-    }
-    20%,
-    40%,
-    60%,
-    80% {
-      transform: translateX(20%) translateY(-10%) rotate(20deg);
-    }
+}
+
+@keyframes abrirDerOjos {
+  100%,
+  70%,
+  50%,
+  30% {
+    transform: rotate(0deg) translateX(-0%) translateY(0%);
   }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(-15%) translateY(10%) rotate(-25deg);
+  }
+}
+
+@keyframes abrirDerBoca {
+  100%,
+  70%,
+  50%,
+  30% {
+    transform: rotate(0deg) translateX(-0%) translateY(0%);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(20%) translateY(-10%) rotate(20deg);
+  }
+}
 
 .reset {
   animation: abrirIzq 0.1s linear forwards alternate;
@@ -343,132 +509,202 @@ svg:hover #caraGroup {
   animation: stroke 1s linear forwards;
 }*/
 .path {
-    fill-opacity: 0;
-    stroke-opacity: 1;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-    stroke-dasharray: 925;
-    stroke-dashoffset: 925;
-    fill: "#EEBE7B";
-    stroke: "#EEBE7B";
-    animation-name: drawStroke, fadeStroke, fillIn;
-    animation-duration: 4s, 1s, 1s;
-    animation-delay: 0s, 3.5s, 3.5s;
-  }
+  fill-opacity: 0;
+  stroke-opacity: 1;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  stroke-dasharray: 925;
+  stroke-dashoffset: 925;
+  fill: "#EEBE7B";
+  stroke: "#EEBE7B";
+  animation-name: drawStroke, fadeStroke, fillIn;
+  animation-duration: 4s, 1s, 1s;
+  animation-delay: 0s, 3.5s, 3.5s;
+}
 
 @keyframes drawStroke {
-    to { stroke-dashOffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes fadeStroke {
-    to { stroke-opacity: 0; }
+  to {
+    stroke-opacity: 0;
   }
-  
-  @keyframes fillIn {
-    from { fill-opacity: 0; }
-    to { fill-opacity: 1; }
-  }
-
-  .box.arrow-left:after {
-    content: " ";
-    position: absolute;
-    left: -15px;
-    top: 25px;
-    border-top: 15px solid transparent;
-    border-right: 15px solid #4553ff;
-    border-left: none;
-    border-bottom: 15px solid transparent;
-  }
-
-  .box.arrow-right:after {
-    content: " ";
-    position: absolute;
-    right: -15px;
-    top: 25px;
-    border-top: 15px solid transparent;
-    border-right: none;
-    border-left: 15px solid  #4553ff;
-    border-bottom: 15px solid transparent;
-  }
-
-  .box {
-    width: 150px;
-    border-radius: 25px;
-    background-color:  var(--v-primary-base); 
-    padding: 20px;
-    position: relative;
-    margin: 40px;
-    float: left;
-  }
-
-  .form-control::placeholder { 
-    color: rgb(161, 161, 161);
-    opacity: 1; /* Firefox */
 }
 
+@keyframes fillIn {
+  from {
+    fill-opacity: 0;
+  }
+  to {
+    fill-opacity: 1;
+  }
+}
+
+.box.arrow-left:after {
+  content: " ";
+  position: absolute;
+  left: -15px;
+  top: 25px;
+  border-top: 15px solid transparent;
+  border-right: 15px solid var(--v-primary-lighten4);
+  border-left: none;
+  border-bottom: 15px solid transparent;
+}
+
+.box.arrow-right:after {
+  content: " ";
+  position: absolute;
+  right: -15px;
+  top: 25px;
+  border-top: 15px solid transparent;
+  border-right: none;
+  border-left: 15px solid var(--v-primary-lighten4);
+  border-bottom: 15px solid transparent;
+}
+
+.box {
+  
+  border-radius: 25px;
+  background-color: var(--v-primary-lighten4);
+  padding: 0px;
+  position: relative;
+  margin: 0px;
+  float: right;
+}
+
+.form-control::placeholder {
+  color: rgb(161, 161, 161);
+  opacity: 1; /* Firefox */
+}
 </style>
 
-<script >
-  //var path = document.querySelector('.path');
+<script>
+//var path = document.querySelector('.path');
 
-import axios from 'axios'
-  //import TableBotVue from ;
-import TableBot from '@/components/TableBot.vue'
+import axios from "axios";
+//import TableBotVue from ;
+import TableBot from "@/components/TableBot.vue";
 //  import table-component from '@/components/TableBot.vue'
 
-  export default{
-    name: "Bot",
+export default {
+  name: "Bot",
 
-    data: () => ({
-      colors: ['red', 'blue', 'green', 'orange', 'DeepPink', 'purple', '#EEBE7B'],
-      caraClass: "path",
-      ojosGroupClass: "",
-      bocaGroupClass: "",
-      rightContent: ".",
-      leftContent: ".",
-      botColor: '#EEBE7B',
-    }),
-    components: {
-      TableBot
+  data: () => ({
+    colors: ["red", "blue", "green", "orange", "DeepPink", "purple", "#EEBE7B"],
+    caraClass: "path",
+    ojosGroupClass: "",
+    bocaGroupClass: "",
+    rightContent: "",
+    leftContent: "Según sus resultados, debe estudiar Ingeniería o Ciencias",
+    botColor: "#EEBE7B",
+
+
+    mathematics:30, 
+    written_expression:40,
+    natural_sciences:30, 
+    foreign_language:55,
+    social_sciences:47,
+
+    humanities:5, 
+    engineering:7, 
+    science:2, 
+    health:7
+  }),
+  components: {
+    TableBot,
+  },
+  methods: {
+    botClick() {
+      var animations = ["anim1", "anim2"];
+      var clase = animations[Math.floor(Math.random() * animations.length)];
+      this.bocaGroupClass = clase + "boca " + this.botColor;
+      this.ojosGroupClass = clase + "ojos " + this.botColor;
+      this.caraClass = clase + " " + this.botColor;
+      const rando = this.colors[Math.floor(Math.random() * this.colors.length)];
+      this.botColor = rando;
+      console.log("click " + this.botColor);
+      //this.getConver();
     },
-    methods: {
-      botClick() {
+    removeClass() {
+      this.bocaGroupClass = "";
+      this.ojosGroupClass = "";
+      this.caraClass = "";
+    },
+
+    async conversar() {
+      try {
+        var dataReq = '{"input":"Hola"}';
+        var headersReq = {
+          //"access-control-allow-origin": "*",
+          "access-control-allow-headers": "*",
+          "access-control-allow-methods": "*",
+        };
+        const response = await axios({
+          url: "http://127.0.0.1:8000/bot/conversation/",
+          data: dataReq,
+          method: "GET",
+          headers: headersReq,
+        }).then((response) => (this.leftContent = response));
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async saberRes() {
+      //this.botClick();
+      this.$refs.form.validate;
+        var self = this;
+        var dataReq = {
+          'mathematics': parseInt(this.mathematics), 
+          'written_expression': this.written_expression,
+          'natural_sciences': this.natural_sciences, 
+          'foreign_language': this.foreign_language,
+          'social_sciences': this.social_sciences,
+
+          'humanities': this.humanities, 
+          'engineering': this.engineering, 
+          'science': this.science, 
+          'health': this.health
+        };
         
-        var animations = ['anim1', 'anim2'];
-        var clase= animations[Math.floor(Math.random() * animations.length)];
-        this.bocaGroupClass = clase+"boca "+this.botColor;
-        this.ojosGroupClass = clase+"ojos "+this.botColor;
-        this.caraClass = clase+" "+this.botColor;
-        const rando = this.colors[Math.floor(Math.random() * this.colors.length)];
-        this.botColor = rando;
-        console.log("click "+ this.botColor)
-        this.getConver();
-      },
-      removeClass() {
-        this.bocaGroupClass = "";
-        this.ojosGroupClass = "";
-        this.caraClass = "";
-      },
-
-      async conversar() {
-        try {
-          
-          var dataReq = '{"input":"Hola"}';
-          var headersReq =  {  "access-control-allow-origin": "*", "access-control-allow-headers": "*", "access-control-allow-methods": "*"};
-          const response = await axios({url:'http://127.0.0.1:8000/bot/conversation/', data:dataReq, method:"GET", headers:headersReq})
-            .then(response => (this.leftContent = response))
-          console.log(response)
-          
-        } catch (error) {
-          console.error(error);
+        var formBody = [];
+        for (var property in dataReq) {
+          var encodedKey = encodeURIComponent(property);
+          var encodedValue = encodeURIComponent(dataReq[property]);
+          formBody.push(encodedKey + "=" + encodedValue);
         }
-      },
+        formBody = formBody.join("&");
 
-      async getConver() {
+        var optionAxios = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+        await axios.post('http://e331-35-231-16-239.ngrok.io/bot', formBody,optionAxios)
+                .then(function (response) {
+                  console.log(response);
+                  console.log(response.data)
+                  const parser = new DOMParser();
+                  const xmlDOM = parser.parseFromString(response.data,"text/xml");
+                  self.rightContent = xmlDOM.getElementsByTagName("Body")[0].childNodes[0].nodeValue;
+                  self.leftContent = xmlDOM.getElementsByTagName("Body")[0].childNodes[0].nodeValue;
+                  self.rightContent = '';
+                })
+                .catch(function (error) {
+                    console.log("error"+error);
+                    
+                  });
+    },
+
+    async getConver() {
       let request = {
         method: "get",
         params: {},
-        data: {"input": "hola"},
+        data: { input: "hola" },
         url: "http://127.0.0.1:8000/bot/conversation",
       };
       (this.responseTitle = "Respuesta"),
@@ -477,15 +713,12 @@ import TableBot from '@/components/TableBot.vue'
           .then((value) => {
             //this.items_empresa = value.data;
             //this.responseText = "Se han cargado las empresas";
-            console.log(value.data)
+            console.log(value.data);
           })
           .catch(function (error) {
             this.responseText = "No se pudo cargar las empresas: " + error;
           });
     },
-
-    },
-
-  }
-
+  },
+};
 </script>
